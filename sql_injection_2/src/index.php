@@ -4,13 +4,13 @@ include 'db.php';
 if (isset($_POST['username'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $query = "SELECT * FROM users WHERE username = '$username' AND password '$password'";
+    $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
 
     $result = $conn->query($query);
 
     if ($result->num_rows > 0) {
         echo "<h2>Login Successful!</h2>";
-        echo "<img src='thumb.png'>";
+        echo "<img src='./thumb.jpg'>";
     } else {
         echo "0 results";
     }
