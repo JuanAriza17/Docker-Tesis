@@ -1,3 +1,7 @@
+<?php
+// Obtener el valor de la variable de entorno FLAG
+$flag = getenv('FLAG') ?: 'Valor por defecto';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +12,7 @@
 <body>
     <h1>¡Hola, Docker!</h1>
     <img src="./yoshi.png">
-    <h1>Dios se apiade de nosotros</h1>
+    <h1><?php echo htmlspecialchars($flag); ?></h1>
 </body>
 </html>
+
