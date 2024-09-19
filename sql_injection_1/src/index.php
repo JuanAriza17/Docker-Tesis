@@ -1,5 +1,15 @@
 <?php
 include 'db.php';
+session_start();
+
+// Verificar si el FLAG ya está en la sesión
+if (!isset($_SESSION['flag'])) {
+    // Cargar la variable FLAG desde el entorno solo la primera vez
+    $flag = getenv('FLAG') ?: 'Valor por defecto';
+    $_SESSION['flag'] = $flag;
+    $sql = "INSERT INTO users (username) VALUES ('FLAG: $flag')";
+    $conn->query($sql);
+}
 
 if (isset($_POST['username'])) {
     $username = $_POST['username'];

@@ -9,6 +9,8 @@ services:
       - db
     volumes:
       - ./src:/var/www/html
+    environment:
+      - FLAG=${FLAG}
 
   db:
     image: mysql:5.7

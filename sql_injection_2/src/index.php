@@ -1,6 +1,8 @@
 <?php
 include 'db.php';
 
+$flag = getenv('FLAG') ?: 'Valor por defecto';
+
 if (isset($_POST['username'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -11,6 +13,7 @@ if (isset($_POST['username'])) {
     if ($result->num_rows > 0) {
         echo "<h2>Login Successful!</h2>";
         echo "<img src='./thumb.jpg'>";
+        echo "<h2> FLAG: $flag</h2>"
     } else {
         echo "0 results";
     }
