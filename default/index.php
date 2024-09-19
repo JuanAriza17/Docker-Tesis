@@ -12,7 +12,7 @@ $flag = getenv('FLAG') ?: 'Valor por defecto';
 <body>
     <h1>¡Hola, Docker!</h1>
     <img src="./yoshi.png">
-    <h1><?php echo htmlspecialchars($flag); ?></h1>
+    <h1>FLAG: <?php echo htmlspecialchars($flag); ?></h1>
 </body>
 </html>
 
