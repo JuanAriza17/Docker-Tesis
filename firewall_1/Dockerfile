@@ -17,6 +17,8 @@ RUN echo 'root:rootpassword' | chpasswd
 COPY check_firewall.sh /usr/local/bin/check_firewall.sh
 RUN chmod +x /usr/local/bin/check_firewall.sh
 
+RUN iptables -A INPUT -p tcp --dport 22 -j ACCEPT  # SSH permitido
+
 # Ejecutar SSH y el script de verificación de firewall
 CMD ["/usr/sbin/sshd", "-D"]
 
