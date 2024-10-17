@@ -19,6 +19,7 @@ RUN chmod +x /usr/local/bin/check_firewall.sh
 
 RUN iptables -A INPUT -p tcp --dport 22 -j ACCEPT  # SSH permitido
 
+EXPOSE 22
 # Ejecutar SSH y el script de verificación de firewall
 CMD ["/usr/sbin/sshd", "-D"]
 
