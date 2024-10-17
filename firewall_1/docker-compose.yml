@@ -1,0 +1,9 @@
+version: '3'
+services:
+  firewall-ctf:
+    build: .
+    ports:
+      - "2222:22"  # Mapea el puerto 22 del contenedor al 2222 en la máquina host
+    cap_add:
+      - NET_ADMIN  # Permite cambiar las reglas de red
+    network_mode: host  # Permite al contenedor interactuar con la red directamente
