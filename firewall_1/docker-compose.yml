@@ -3,13 +3,10 @@ version: '3.8'
 services:
   firewall:
     build: .
-    container_name: my_firewall_container
     ports:
-      - "22:22"
+      - "2222:22"
     cap_add:
       - NET_ADMIN
       - NET_RAW
-    volumes:
-      - ./check_firewall.sh:/usr/local/bin/check_firewall.sh
     stdin_open: true
     tty: true
