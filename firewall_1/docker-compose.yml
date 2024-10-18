@@ -1,9 +1,15 @@
-version: '3'
+version: '3.8'
+
 services:
-  firewall-ctf:
+  firewall:
     build: .
+    container_name: my_firewall_container
     ports:
-      - "22:22"  # Mapea el puerto 22 del contenedor al 2222 en la máquina host
+      - "22:22"
     cap_add:
-      - NET_ADMIN  # Permite cambiar las reglas de red
-    network_mode: host  # Permite al contenedor interactuar con la red directamente
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - ./check_firewall.sh:/usr/local/bin/check_firewall.sh
+    stdin_open: true
+    tty: true
