@@ -18,7 +18,7 @@ RUN chmod 440 /etc/sudoers.d/firewalluser
 COPY check_firewall.sh /home/firewalluser/check_firewall.sh
 
 # Establecer permisos para el script de verificación
-RUN chown root:root /usr/local/bin/check_firewall.sh && chmod 750 /usr/local/bin/check_firewall.sh
+RUN chown root:root /home/firewalluser/check_firewall.sh && chmod 711 /home/firewalluser/check_firewall.sh
 
 # Cambiar la shell predeterminada del usuario para restringir comandos
 RUN chsh -s /bin/rbash firewalluser
