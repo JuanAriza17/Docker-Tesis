@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  firewall:
+    build: .
+    ports:
+      - "2222:22"
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    stdin_open: true
+    tty: true
+    environment:
+      - FLAG=${FLAG}

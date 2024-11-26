@@ -1,0 +1,1 @@
+Corrige las reglas del firewall para permitir solo tráfico SSH desde la red interna 192.168.0.0/16 y HTTPS hacia el servidor 203.0.113.5, bloqueando redes maliciosas como 203.0.113.0/24 y todo tráfico FTP. Además, elimina configuraciones inseguras que permitan tráfico abierto. Configura correctamente el firewall para recibir la FLAG como validación de tu éxito.
