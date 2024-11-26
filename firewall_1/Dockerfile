@@ -15,10 +15,12 @@ RUN echo "firewalluser ALL=(ALL) NOPASSWD: /sbin/iptables, /usr/local/bin/check_
 RUN chmod 440 /etc/sudoers.d/firewalluser
 
 # Copiar el script de verificación de firewall
-COPY check_firewall.sh /home/firewalluser/check_firewall.sh
+COPY check_firewall.sh /usr/local/bin/check_firewall.sh
 
 # Establecer permisos para el script de verificación
-RUN chown root:root /home/firewalluser/check_firewall.sh && chmod 711 /home/firewalluser/check_firewall.sh
+RUN chown root:firewalluser /usr/local/bin/check_firewall.sh && chmod 711 /usr/local/bin/check_firewall.sh
+
+RUN cp /usr/local/bin/check_firewall.sh $HOME/check_firewall.sh
 
 # Cambiar la shell predeterminada del usuario para restringir comandos
 RUN chsh -s /bin/rbash firewalluser
