@@ -34,4 +34,4 @@ WORKDIR /home/user
 EXPOSE 1337
 
 # Comando por defecto (un shell bash para interactuar con el sistema)
-CMD ["/bin/bash"]
+CMD ["/usr/sbin/sshd", "-D"]
