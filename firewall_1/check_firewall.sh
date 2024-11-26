@@ -1,5 +1,19 @@
 #!/bin/bash
 
+# Cargar las variables desde el archivo .env
+if [ -f "/home/firewalluser/.env" ]; then
+    export $(grep -v '^#' /home/firewalluser/.env | xargs)
+else
+    echo "Error: Archivo .env no encontrado."
+    exit 1
+fi
+
+# Verifica si la variable FLAG está definida
+if [ -z "$FLAG" ]; then
+    echo "Error: La flag no está definida en el archivo .env."
+    exit 1
+fi
+
 # Reglas esperadas del firewall (puedes ajustar las reglas según el reto)
 EXPECTED_RULES=(
     "ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:ssh"
