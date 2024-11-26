@@ -20,12 +20,6 @@ RUN useradd -m -d /home/user -s /bin/rbash user && echo 'user:password123' | chp
 RUN echo 'user ALL=(ALL) ALL, !ALL\n user ALL=(ALL) NOPASSWD: /home/user/vuln.sh' > /etc/sudoers.d/user && \
     chmod 440 /etc/sudoers.d/user
 
-# Escribir la variable FLAG en un archivo durante la construcción del contenedor
-RUN echo "FLAG{${FLAG}}" > /home/user/flag.txt && \
-    chmod 000 /home/user/flag.txt && \
-    chown root:root /home/user/flag.txt
-
-
 # Crear un archivo vulnerable que requiera escalación de privilegios
 RUN echo -e '#!/bin/bash\n# Este es un archivo vulnerable que debe ser explotado\n echo "¡Vulnerabilidad encontrada!"' > /home/user/vuln.sh && \
     chmod +x /home/user/vuln.sh && \

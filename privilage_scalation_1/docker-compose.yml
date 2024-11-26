@@ -15,3 +15,5 @@ services:
     tty: true
     environment:
       - FLAG=${FLAG}
+    command: >
+      sh -c "echo 'FLAG{$FLAG}' > /home/user/flag.txt && chmod 000 /home/user/flag.txt && chown root:root /home/user/flag.txt && bash"
