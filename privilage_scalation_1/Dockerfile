@@ -21,7 +21,7 @@ RUN echo 'user ALL=(ALL) ALL, !ALL\n user ALL=(ALL) NOPASSWD: /home/user/vuln.sh
     chmod 440 /etc/sudoers.d/user
 
 # Escribir la variable FLAG en un archivo durante la construcción del contenedor
-RUN echo "$FLAG" > /home/user/flag.txt && \
+RUN echo "FLAG{${FLAG}}" > /home/user/flag.txt && \
     chmod 000 /home/user/flag.txt && \
     chown root:root /home/user/flag.txt
 
