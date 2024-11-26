@@ -11,22 +11,20 @@ RUN mkdir /var/run/sshd
 RUN useradd -m -d /home/firewalluser -s /bin/rbash firewalluser && echo 'firewalluser:password123' | chpasswd
 
 # Configurar permisos limitados para firewalluser en sudoers
-RUN echo "firewalluser ALL=(ALL) NOPASSWD: /sbin/iptables, /usr/local/bin/check_firewall.sh" > /etc/sudoers.d/firewalluser
+RUN echo "firewalluser ALL=(ALL) NOPASSWD: /sbin/iptables, /home/firewalluser/check_firewall.sh" > /etc/sudoers.d/firewalluser
 RUN chmod 440 /etc/sudoers.d/firewalluser
 
+# Crear el directorio home del usuario si no existe
+RUN mkdir -p /home/firewalluser
+
 # Copiar el script de verificación de firewall
-COPY check_firewall.sh /usr/local/bin/check_firewall.sh
+COPY check_firewall.sh /home/firewalluser/check_firewall.sh
 
 # Cambiar el propietario del archivo al usuario firewalluser y establecer permisos
-RUN chown firewalluser:firewalluser /usr/local/bin/check_firewall.sh && chmod 111 /usr/local/bin/check_firewall.sh
+RUN chown firewalluser:firewalluser /home/firewalluser/check_firewall.sh && chmod 111 /home/firewalluser/check_firewall.sh
 
 # Cambiar la shell predeterminada del usuario para restringir comandos
 RUN chsh -s /bin/rbash firewalluser
-
-# Bloquear acceso a comandos no necesarios (opcional pero recomendado)
-RUN ln -s /bin/false /home/firewalluser/iptables && \
-    ln -s /bin/false /home/firewalluser/bash && \
-    ln -s /bin/false /home/firewalluser/sh
 
 # Modificar el archivo SSH para deshabilitar acceso root y permitir solo el nuevo usuario
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
@@ -37,4 +35,5 @@ EXPOSE 22
 
 # Comando para iniciar el servidor SSH
 CMD ["/usr/sbin/sshd", "-D"]
+
 
