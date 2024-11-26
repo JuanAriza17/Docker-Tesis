@@ -23,8 +23,8 @@ COPY context.txt /home/firewalluser/context.txt
 
 # Copiar el archivo .env al contenedor
 COPY .env /usr/local/bin/.env
-COPY init_rules.sh /etc/init.d/init_rules.sh
-RUN chmod +x /etc/init.d/init_rules.sh
+COPY init_rules.sh /usr/local/bin/init_rules.sh
+RUN chmod +x /usr/local/bin/init_rules.sh
 
 # Cambiar el propietario del archivo al usuario firewalluser y establecer permisos
 RUN chown firewalluser:firewalluser /home/firewalluser/check_firewall.sh && chmod 111 /home/firewalluser/check_firewall.sh
@@ -42,7 +42,9 @@ EXPOSE 22
 
 ENV FLAG=${FLAG}
 
+ENTRYPOINT [ "/usr/local/bin/init_rules.sh" ]
+
 # Comando para iniciar el servidor SSH
-CMD ["/etc/init.d/init_rules.sh &&/usr/sbin/sshd -D"]
+CMD ["/usr/sbin/sshd", "-D"]
 
 
