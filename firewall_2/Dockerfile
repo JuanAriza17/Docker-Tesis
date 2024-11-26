@@ -23,6 +23,8 @@ COPY context.txt /home/firewalluser/context.txt
 
 # Copiar el archivo .env al contenedor
 COPY .env /usr/local/bin/.env
+COPY init_rules.sh /etc/init.d/init_rules.sh
+RUN chmod +x /etc/init.d/init_rules.sh
 
 # Cambiar el propietario del archivo al usuario firewalluser y establecer permisos
 RUN chown firewalluser:firewalluser /home/firewalluser/check_firewall.sh && chmod 111 /home/firewalluser/check_firewall.sh
@@ -34,9 +36,6 @@ RUN chsh -s /bin/rbash firewalluser
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
 RUN echo "AllowUsers firewalluser" >> /etc/ssh/sshd_config
 
-# Añadir reglas pichas
-RUN iptables -A INPUT -p tcp --dport ssh -j ACCEPT 
-RUN iptables -A INPUT -j ACCEPT 
 
 # Exponer el puerto 22 para SSH
 EXPOSE 22
@@ -44,6 +43,6 @@ EXPOSE 22
 ENV FLAG=${FLAG}
 
 # Comando para iniciar el servidor SSH
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["/etc/init.d/init_rules.sh &&/usr/sbin/sshd -D"]
 
 
