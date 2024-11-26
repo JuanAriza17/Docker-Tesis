@@ -23,6 +23,10 @@ RUN echo -e '#!/bin/bash\n# Este es un archivo vulnerable que debe ser explotado
     chmod +x /home/user/vuln.sh && \
     chown user:user /home/user/vuln.sh
 
+# Modificar el archivo SSH para deshabilitar acceso root y permitir solo el nuevo usuario
+RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
+RUN echo "AllowUsers user" >> /etc/ssh/sshd_config
+
 # Cambiar a un directorio vulnerable
 WORKDIR /home/user
 
