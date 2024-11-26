@@ -42,9 +42,7 @@ EXPOSE 22
 
 ENV FLAG=${FLAG}
 
-ENTRYPOINT [ "/usr/local/bin/init_rules.sh" ]
-
 # Comando para iniciar el servidor SSH
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["/usr/local/bin/init_rules.sh" ]
 
 
