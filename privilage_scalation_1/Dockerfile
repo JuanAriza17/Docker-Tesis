@@ -17,7 +17,7 @@ RUN useradd -m -d /home/user -s /bin/rbash user && echo 'user:password123' | chp
     adduser user sudo
 
 # Configurar el archivo sudoers para requerir una contraseña
-RUN echo 'user ALL=(ALL) ALL: /usr/bin/some-safe-command' > /etc/sudoers.d/user && \
+RUN echo 'user ALL=(ALL) ALL: /home/user/vuln.sh' > /etc/sudoers.d/user && \
     chmod 440 /etc/sudoers.d/user
 
 # Crear una flag que será leída al finalizar el reto
@@ -26,7 +26,8 @@ ENV FLAG=${FLAG}
 # Crear un archivo vulnerable que requiera escalación de privilegios
 RUN echo -e '#!/bin/bash\n# Este es un archivo vulnerable que debe ser explotado\n echo "¡Vulnerabilidad encontrada!"' > /home/user/vuln.sh && \
     chmod +x /home/user/vuln.sh && \
-    chown user:user /home/user/vuln.sh
+    chmod u+s /home/user/vuln.sh && \
+    chown root:root /home/user/vuln.sh
 
 # Modificar el archivo SSH para deshabilitar acceso root y permitir solo el nuevo usuario
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
