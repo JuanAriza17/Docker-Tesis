@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Cargar las variables desde el archivo .env
-if [ -f "/home/firewalluser/.env" ]; then
-    export $(grep -v '^#' /home/firewalluser/.env | xargs)
+if [ -f "/usr/local/bin/.env" ]; then
+    export $(grep -v '^#' /usr/local/bin/.env | xargs)
 else
     echo "Error: Archivo .env no encontrado."
     exit 1
@@ -34,7 +34,7 @@ check_firewall_rules() {
 
 # Si todas las reglas están presentes, muestra la flag
 if check_firewall_rules; then
-    echo "FLAG: $FLAG"
+    echo "FLAG:$FLAG"
 else
     echo "Faltan reglas en el firewall. ¡Sigue intentando!"
 fi

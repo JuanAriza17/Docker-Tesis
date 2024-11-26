@@ -21,7 +21,7 @@ RUN mkdir -p /home/firewalluser
 COPY check_firewall.sh /home/firewalluser/check_firewall.sh
 
 # Copiar el archivo .env al contenedor
-COPY .env /home/firewalluser/.env
+COPY .env /usr/local/bin/.env
 
 # Cambiar el propietario del archivo al usuario firewalluser y establecer permisos
 RUN chown firewalluser:firewalluser /home/firewalluser/check_firewall.sh && chmod 111 /home/firewalluser/check_firewall.sh
