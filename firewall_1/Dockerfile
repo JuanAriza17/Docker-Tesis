@@ -14,13 +14,14 @@ RUN useradd -m -d /home/firewalluser -s /bin/rbash firewalluser && echo 'firewal
 RUN echo "firewalluser ALL=(ALL) NOPASSWD: /sbin/iptables, /usr/local/bin/check_firewall.sh" > /etc/sudoers.d/firewalluser
 RUN chmod 440 /etc/sudoers.d/firewalluser
 
+# Crear el directorio home del usuario si no existe
+RUN mkdir -p /home/firewalluser
+
 # Copiar el script de verificación de firewall
-COPY check_firewall.sh /usr/local/bin/check_firewall.sh
+COPY check_firewall.sh /home/firewalluser/check_firewall.sh
 
-# Establecer permisos para el script de verificación
-RUN chown root:firewalluser /usr/local/bin/check_firewall.sh && chmod 711 /usr/local/bin/check_firewall.sh
-
-RUN cp /usr/local/bin/check_firewall.sh $HOME/check_firewall.sh
+# Cambiar el propietario del archivo al usuario firewalluser y establecer permisos
+RUN chown firewalluser:firewalluser /home/firewalluser/check_firewall.sh && chmod 111 /home/firewalluser/check_firewall.sh
 
 # Cambiar la shell predeterminada del usuario para restringir comandos
 RUN chsh -s /bin/rbash firewalluser
