@@ -10,7 +10,7 @@ services:
     tty: true
     ports:
       - "1337:1337"
-      - "2222:2222"
+      - "2222:22"
     cap_add:
       - NET_ADMIN
       - NET_RAW
