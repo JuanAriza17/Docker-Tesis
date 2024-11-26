@@ -20,7 +20,7 @@ check_firewall_rules() {
 
 # Si todas las reglas están presentes, muestra la flag
 if check_firewall_rules; then
-    echo "FLAG: " $FLAG
+    echo "FLAG: $FLAG"
 else
     echo "Faltan reglas en el firewall. ¡Sigue intentando!"
 fi

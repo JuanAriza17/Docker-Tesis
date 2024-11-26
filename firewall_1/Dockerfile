@@ -33,6 +33,8 @@ RUN echo "AllowUsers firewalluser" >> /etc/ssh/sshd_config
 # Exponer el puerto 22 para SSH
 EXPOSE 22
 
+ENV FLAG=${FLAG}
+
 # Comando para iniciar el servidor SSH
 CMD ["/usr/sbin/sshd", "-D"]
 

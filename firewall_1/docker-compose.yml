@@ -10,3 +10,5 @@ services:
       - NET_RAW
     stdin_open: true
     tty: true
+    environment:
+      - FLAG=${FLAG}
