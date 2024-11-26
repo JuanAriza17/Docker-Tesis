@@ -19,6 +19,7 @@ RUN mkdir -p /home/firewalluser
 
 # Copiar el script de verificación de firewall
 COPY check_firewall.sh /home/firewalluser/check_firewall.sh
+COPY context.txt /home/firewalluser/context.txt
 
 # Copiar el archivo .env al contenedor
 COPY .env /usr/local/bin/.env
