@@ -17,7 +17,7 @@ RUN useradd -m -d /home/user -s /bin/rbash user && echo 'user:password123' | chp
     adduser user sudo
 
 # Configurar el archivo sudoers para requerir una contraseña
-RUN echo 'user ALL=(ALL) NOPASSWD: /home/user/vuln.sh\n user ALL=(ALL) ALL, !ALL' > /etc/sudoers.d/user && \
+RUN echo 'user ALL=(ALL) ALL, !ALL\n user ALL=(ALL) NOPASSWD: /home/user/vuln.sh' > /etc/sudoers.d/user && \
     chmod 440 /etc/sudoers.d/user
 
 # Crear una flag que será leída al finalizar el reto
