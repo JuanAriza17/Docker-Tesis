@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  privilege-escalation:
+    build: .
+    container_name: privilege-escalation
+    environment:
+      - FLAG=${FLAG}
+    stdin_open: true
+    tty: true
+    ports:
+      - "1337:1337"
+      - "2222:2222"
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
