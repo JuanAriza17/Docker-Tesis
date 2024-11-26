@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  xss-app:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      - FLAG=${FLAG}
