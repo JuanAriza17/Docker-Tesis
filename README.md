@@ -27,12 +27,6 @@ Para obtener detalles sobre cómo resolver cada práctica, consulta el documento
 
 ---
 
-## Contribuciones
-
-Si tienes ideas para nuevas prácticas, ¡envía un pull request o abre un problema en este repositorio!
-
----
-
 ## Licencia
 
 Este repositorio está bajo la licencia [MIT](LICENSE).
